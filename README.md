@@ -37,12 +37,13 @@ Download google-services.json and place it in android/app/
 ##4. Run the App
   
    flutter run
-   ✅ Works on emulator or real device (not supported on web for this assignment).
+   ✅ Works on emulator or real device 
+   
 
- ##Folder Structure##
+ Folder Structure
 
 lib/
-├── cubit/         # Bloc state management
+├── providers/         # Bloc state management
 ├── models/        # Data models
 ├── screens/       # UI screens
 ├── services/      # Firebase services
