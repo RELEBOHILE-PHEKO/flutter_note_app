@@ -1,4 +1,4 @@
-📝 Flutter Firebase Note App
+📝 ##Flutter Firebase Note App
 A simple note-taking app built with Flutter, Firebase Authentication, Cloud Firestore, and Bloc for state management.
 
 📱 Features
@@ -18,15 +18,12 @@ A simple note-taking app built with Flutter, Firebase Authentication, Cloud Fire
 
 🚀 Getting Started
 1. Clone the Repo
-   bash
-   Copy
-   Edit
+  
+  
    git clone https://github.com/YOUR_USERNAME/flutter_note_app.git
    cd flutter_note_app
 2. Install Dependencies
-   bash
-   Copy
-   Edit
+   
    flutter pub get
 3. Firebase Setup
    Create a Firebase project
@@ -37,17 +34,13 @@ Enable Cloud Firestore
 
 Download google-services.json and place it in android/app/
 
-4. Run the App
-   bash
-   Copy
-   Edit
+##4. Run the App
+  
    flutter run
    ✅ Works on emulator or real device (not supported on web for this assignment).
 
-📂 Folder Structure
-bash
-Copy
-Edit
+ ##Folder Structure
+
 lib/
 ├── cubit/         # Bloc state management
 ├── models/        # Data models
