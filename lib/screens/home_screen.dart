@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/note_provider.dart';
 import '../services/auth_service.dart';
 import '../widgets/note_card.dart';
-import '../screens/login_screen.dart'; // Add this import
+import '../screens/login_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -30,10 +30,10 @@ class _HomeScreenState extends State<HomeScreen> {
         actions: [
           IconButton(
             onPressed: () async {
+              final navigator = Navigator.of(context);
               await AuthService().signOut();
               if (mounted) {
-                Navigator.pushReplacement(
-                  context,
+                navigator.pushReplacement(
                   MaterialPageRoute(builder: (_) => const LoginScreen()),
                 );
               }
@@ -69,9 +69,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
                 onDelete: () async {
+                  final messenger = ScaffoldMessenger.of(context);
                   await noteProvider.deleteNote(note.id);
                   if (mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
+                    messenger.showSnackBar(
                       const SnackBar(content: Text("Note deleted")),
                     );
                   }
@@ -116,34 +117,36 @@ class _HomeScreenState extends State<HomeScreen> {
           ElevatedButton(
             onPressed: () async {
               if (noteCtrl.text.trim().isEmpty) {
-                ScaffoldMessenger.of(context).showSnackBar(
+                ScaffoldMessenger.of(dialogContext).showSnackBar(
                   const SnackBar(content: Text("Please enter some text")),
                 );
                 return;
               }
 
               final noteProvider = context.read<NoteProvider>();
+              final messenger = ScaffoldMessenger.of(context);
+              final navigator = Navigator.of(dialogContext);
 
               try {
                 if (isEdit && noteId != null) {
                   await noteProvider.updateNote(noteId, noteCtrl.text.trim());
                   if (mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
+                    messenger.showSnackBar(
                       const SnackBar(content: Text("Note updated")),
                     );
                   }
                 } else {
                   await noteProvider.addNote(noteCtrl.text.trim());
                   if (mounted) {
-                    ScaffoldMessenger.of(context).showSnackBar(
+                    messenger.showSnackBar(
                       const SnackBar(content: Text("Note added")),
                     );
                   }
                 }
-                Navigator.pop(dialogContext);
+                navigator.pop();
               } catch (e) {
                 if (mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
+                  messenger.showSnackBar(
                     SnackBar(content: Text("Error: ${e.toString()}")),
                   );
                 }
